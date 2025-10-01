@@ -1,0 +1,21 @@
+package com.victorisimo.platzi_play.persistence.mapper;
+
+import com.victorisimo.platzi_play.domain.dto.MovieDto;
+import com.victorisimo.platzi_play.persistence.entity.MovieEntity;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+import java.util.List;
+
+@Mapper(componentModel = "spring")
+public interface MovieMapper {
+
+    @Mapping(source = "title", target = "title")
+    @Mapping(source = "timeMinutes", target = "timeMinutes")
+    @Mapping(source = "gender", target = "gender")
+    @Mapping(source = "releaseDate", target = "releaseDate")
+    @Mapping(source = "rating", target = "rating")
+    @Mapping(source = "status", target = "status")
+    MovieDto toDto(MovieEntity movieEntity);
+    List<MovieDto> toDto(Iterable<MovieEntity> movieEntities);
+}
