@@ -1,4 +1,4 @@
-package com.victorisimo.platzi_play;
+package com.victorisimo.platzi_play.domain.service;
 
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
