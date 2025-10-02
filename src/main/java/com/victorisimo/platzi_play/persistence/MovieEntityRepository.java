@@ -52,4 +52,14 @@ public class MovieEntityRepository implements MovieRepository {
             return null;
         }
     }
+
+    @Override
+    public Boolean delete(long id) {
+        if(this.crudMovieEntity.existsById(id)){
+            this.crudMovieEntity.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
