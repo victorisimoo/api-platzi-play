@@ -7,6 +7,7 @@ import com.victorisimo.platzi_play.domain.repository.MovieRepository;
 import com.victorisimo.platzi_play.persistence.crud.CrudMovieEntity;
 import com.victorisimo.platzi_play.persistence.entity.MovieEntity;
 import com.victorisimo.platzi_play.persistence.mapper.MovieMapper;
+import com.victorisimo.platzi_play.web.exception.MovieModifiedDontExist;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class MovieEntityRepository implements MovieRepository {
             this.movieMapper.updateEntityFromDto(updateMovieDto, movieEntity);
             return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
         }else{
-            return null;
+            throw new MovieModifiedDontExist(id);
         }
     }
 

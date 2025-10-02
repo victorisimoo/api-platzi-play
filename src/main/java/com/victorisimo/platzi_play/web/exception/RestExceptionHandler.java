@@ -14,5 +14,11 @@ public class RestExceptionHandler {
         return ResponseEntity.badRequest().body(error);
     }
 
+    @ExceptionHandler(MovieModifiedDontExist.class)
+    public ResponseEntity<Error> handleException(MovieModifiedDontExist exception) {
+        Error error = new Error("movie-does-not-exist", exception.getMessage());
+        return ResponseEntity.badRequest().body(error);
+    }
+
 
 }
