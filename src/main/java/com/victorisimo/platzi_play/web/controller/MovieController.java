@@ -1,6 +1,7 @@
 package com.victorisimo.platzi_play.web.controller;
 
 import com.victorisimo.platzi_play.domain.dto.MovieDto;
+import com.victorisimo.platzi_play.domain.dto.UpdateMovieDto;
 import com.victorisimo.platzi_play.domain.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +46,11 @@ public class MovieController {
     @PostMapping
     public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.movieService.save(movieDto));
+    }
+
+    // Method to update an existing movie
+    @PutMapping("/{id}")
+    public ResponseEntity<MovieDto> updateMovie(@PathVariable long id, @RequestBody UpdateMovieDto updateMovieDto) {
+        return ResponseEntity.ok(this.movieService.update(id, updateMovieDto));
     }
 }

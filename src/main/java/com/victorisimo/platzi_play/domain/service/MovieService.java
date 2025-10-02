@@ -1,6 +1,7 @@
 package com.victorisimo.platzi_play.domain.service;
 
 import com.victorisimo.platzi_play.domain.dto.MovieDto;
+import com.victorisimo.platzi_play.domain.dto.UpdateMovieDto;
 import com.victorisimo.platzi_play.domain.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,9 @@ public class MovieService {
 
     public MovieDto save(MovieDto movieDto){
         return this.movieRepository.save(movieDto);
+    }
+
+    public MovieDto update(long id, UpdateMovieDto movieDto){
+        return this.movieRepository.update(id, movieDto);
     }
 }
