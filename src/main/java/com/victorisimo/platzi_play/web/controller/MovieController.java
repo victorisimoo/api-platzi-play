@@ -2,11 +2,10 @@ package com.victorisimo.platzi_play.web.controller;
 
 import com.victorisimo.platzi_play.domain.dto.MovieDto;
 import com.victorisimo.platzi_play.domain.service.MovieService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 // MovieController class to handle movie-related HTTP requests
@@ -31,6 +30,7 @@ public class MovieController {
         }
     }
 
+    // Method to get a movie by its ID
     @GetMapping("/{id}")
     public ResponseEntity<MovieDto> getById(@PathVariable long id) {
         MovieDto response = this.movieService.getById(id);
@@ -39,5 +39,11 @@ public class MovieController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    // Method to add a new movie
+    @PostMapping
+    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.movieService.save(movieDto));
     }
 }

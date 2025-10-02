@@ -21,4 +21,8 @@ public class MovieService {
     public MovieDto getById(long id){
         return this.movieRepository.getById(id);
     }
+
+    public MovieDto save(MovieDto movieDto){
+        return this.movieRepository.save(movieDto);
+    }
 }
