@@ -8,8 +8,6 @@ import com.victorisimo.platzi_play.persistence.entity.MovieEntity;
 import com.victorisimo.platzi_play.persistence.mapper.MovieMapper;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -42,10 +40,6 @@ public class MovieEntityRepository implements MovieRepository {
     public MovieDto update(long id, UpdateMovieDto updateMovieDto) {
         MovieEntity movieEntity = this.crudMovieEntity.findById(id).orElse(null);
         if(movieEntity != null) {
-            /* movieEntity.setTitle(updateMovieDto.title());
-            movieEntity.setReleaseDate(LocalDate.parse(updateMovieDto.releaseDate()));
-            movieEntity.setRating(BigDecimal.valueOf(updateMovieDto.rating()));
-            movieEntity.setStatus(String.valueOf(updateMovieDto.status()));*/
             this.movieMapper.updateEntityFromDto(updateMovieDto, movieEntity);
             return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
         }else{

@@ -1,8 +1,10 @@
 package com.victorisimo.platzi_play.web.controller;
 
 import com.victorisimo.platzi_play.domain.dto.MovieDto;
+import com.victorisimo.platzi_play.domain.dto.SuggestRequestDto;
 import com.victorisimo.platzi_play.domain.dto.UpdateMovieDto;
 import com.victorisimo.platzi_play.domain.service.MovieService;
+import com.victorisimo.platzi_play.domain.service.PlatziPlayAiService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +17,11 @@ import java.util.List;
 public class MovieController {
 
     private final MovieService movieService;
+    private final PlatziPlayAiService platziPlayAiService;
 
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, PlatziPlayAiService platziPlayAiService) {
         this.movieService = movieService;
+        this.platziPlayAiService = platziPlayAiService;
     }
 
     // Method to get all movies
@@ -62,5 +66,10 @@ public class MovieController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/suggestions")
+    public ResponseEntity<String> generateMoviesSuggestions(@RequestBody SuggestRequestDto suggestRequestDto) {
+        return ResponseEntity.ok().body(platziPlayAiService.generateMoviesSuggestions(suggestRequestDto.userPreferences()));
     }
 }
